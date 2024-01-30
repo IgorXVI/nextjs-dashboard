@@ -7,8 +7,8 @@ import {
   fetchLatestInvoices,
   fetchTotalPaidInvoices,
   fetchTotalPendingInvoices,
-  fetchTotalInvoices,
-  fetchTotaCustomers
+  fetchNumberOfInvoices,
+  fetchNumberOfCustomers
 } from '@/app/lib/data';
 
 export default async function Page() {
@@ -24,8 +24,8 @@ export default async function Page() {
     fetchLatestInvoices(),
     fetchTotalPaidInvoices(),
     fetchTotalPendingInvoices(),
-    fetchTotalInvoices(),
-    fetchTotaCustomers()
+    fetchNumberOfInvoices(),
+    fetchNumberOfCustomers()
   ])
 
   return (

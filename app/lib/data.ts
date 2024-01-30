@@ -231,15 +231,15 @@ export async function getUser(email: string) {
 }
 
 
-export async function fetchTotalPaidInvoices(): Promise<number> {
+export async function fetchTotalPaidInvoices(): Promise<string> {
   try {
     const data = await sql<any>`
-		SELECT COUNT(id) as result
+		SELECT SUM(amount) as result
 		FROM invoices
     WHERE status = 'paid'
 	  `;
 
-    const count = data.rows[0].result
+    const count = formatCurrency(data.rows[0].result)
 
     return count;
   } catch (err) {
@@ -248,15 +248,15 @@ export async function fetchTotalPaidInvoices(): Promise<number> {
   }
 }
 
-export async function fetchTotalPendingInvoices(): Promise<number> {
+export async function fetchTotalPendingInvoices(): Promise<string> {
   try {
     const data = await sql<any>`
-		SELECT COUNT(id) as result
+		SELECT SUM(amount) as result
 		FROM invoices
     WHERE status = 'pending'
 	  `;
 
-    const count = data.rows[0].result
+    const count = formatCurrency(data.rows[0].result)
 
     return count;
   } catch (err) {
@@ -265,7 +265,7 @@ export async function fetchTotalPendingInvoices(): Promise<number> {
   }
 }
 
-export async function fetchTotalInvoices(): Promise<number> {
+export async function fetchNumberOfInvoices(): Promise<number> {
   try {
     const data = await sql<any>`
 		SELECT COUNT(id) as result
@@ -281,7 +281,7 @@ export async function fetchTotalInvoices(): Promise<number> {
   }
 }
 
-export async function fetchTotaCustomers(): Promise<number> {
+export async function fetchNumberOfCustomers(): Promise<number> {
   try {
     const data = await sql<any>`
 		SELECT COUNT(id) as result
