@@ -229,3 +229,70 @@ export async function getUser(email: string) {
     throw new Error('Failed to fetch user.');
   }
 }
+
+
+export async function fetchTotalPaidInvoices(): Promise<number> {
+  try {
+    const data = await sql<any>`
+		SELECT COUNT(id) as result
+		FROM invoices
+    WHERE status = 'paid'
+	  `;
+
+    const count = data.rows[0].result
+
+    return count;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch customer table.');
+  }
+}
+
+export async function fetchTotalPendingInvoices(): Promise<number> {
+  try {
+    const data = await sql<any>`
+		SELECT COUNT(id) as result
+		FROM invoices
+    WHERE status = 'pending'
+	  `;
+
+    const count = data.rows[0].result
+
+    return count;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch customer table.');
+  }
+}
+
+export async function fetchTotalInvoices(): Promise<number> {
+  try {
+    const data = await sql<any>`
+		SELECT COUNT(id) as result
+		FROM invoices
+	  `;
+
+    const count = data.rows[0].result
+
+    return count;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch customer table.');
+  }
+}
+
+export async function fetchTotaCustomers(): Promise<number> {
+  try {
+    const data = await sql<any>`
+		SELECT COUNT(id) as result
+		FROM customers
+	  `;
+
+    const count = data.rows[0].result
+
+    return count;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch customer table.');
+  }
+}
